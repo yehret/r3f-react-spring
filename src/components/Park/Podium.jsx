@@ -1,4 +1,4 @@
-import { useSpring } from '@react-spring/three';
+import { useSpring, animated } from '@react-spring/three';
 import Bear from './Bear';
 import Dog from './Dog';
 import Duck from './Duck';
@@ -63,60 +63,91 @@ export const Podium = (props) => {
     },
     to: [
       {
-        bearPositionY: 0.5,
         bearScale: ANIMAL_SCALE_GROW,
-        bearPodiumRotation: Math.PI,
+        bearPositionY: 0.5,
         bearPodiumScale: 1,
+        bearPodiumRotation: Math.PI,
         bearPodiumColor: '#6f2f23',
       },
       {
-        dogPositionY: 0.5,
         dogScale: ANIMAL_SCALE_GROW,
-        dogPodiumRotation: Math.PI,
+        dogPositionY: 0.5,
         dogPodiumScale: 1,
-        dogPodiumColor: '#6f2f23',
+        dogPodiumRotation: Math.PI,
+        dogPodiumColor: '#cea77d',
       },
       {
-        duckPositionY: 0.5,
         duckScale: ANIMAL_SCALE_GROW,
-        duckPodiumRotation: Math.PI,
+        duckPositionY: 0.5,
         duckPodiumScale: 1,
-        duckPodiumColor: '#6f2f23',
+        duckPodiumRotation: Math.PI,
+        duckPodiumColor: 'yellow',
+      },
+      {
+        duckScale: ANIMAL_SCALE,
+        duckPositionY: 0.25,
+        duckPodiumScale: 0.5,
+        duckPodiumRotation: 0,
+        duckPodiumColor: '#906efa',
+        dogScale: ANIMAL_SCALE,
+        dogPositionY: 0.25,
+        dogPodiumScale: 0.5,
+        dogPodiumRotation: 0,
+        dogPodiumColor: '#906efa',
+        bearScale: ANIMAL_SCALE,
+        bearPositionY: 0.25,
+        bearPodiumScale: 0.5,
+        bearPodiumRotation: 0,
+        bearPodiumColor: '#906efa',
       },
     ],
+    config: {
+      mass: 4,
+      tension: 700,
+      friction: 40,
+    },
+    loop: true,
   });
 
   return (
     <group {...props}>
-      <group position-y={bearPositionY} scale-x={bearScale} scale-y={bearScale} scale-z={bearScale}>
+      <animated.group
+        position-y={bearPositionY}
+        scale-x={bearScale}
+        scale-y={bearScale}
+        scale-z={bearScale}>
         <Bear />
-      </group>
-      <mesh scale-y={bearPodiumScale} rotation-y={bearPodiumRotation}>
+      </animated.group>
+      <animated.mesh scale-y={bearPodiumScale} rotation-y={bearPodiumRotation}>
         <boxGeometry />
         <meshStandardMaterial color={bearPodiumColor} />
-      </mesh>
+      </animated.mesh>
 
       <group position={[3, 0, 0]}>
-        <group position-y={dogPositionY} scale-x={dogScale} scale-y={dogScale} scale-z={dogScale}>
+        <animated.group
+          position-y={dogPositionY}
+          scale-x={dogScale}
+          scale-y={dogScale}
+          scale-z={dogScale}>
           <Dog />
-        </group>
-        <mesh scale-y={dogPodiumScale} rotation-y={dogPodiumRotation}>
+        </animated.group>
+        <animated.mesh scale-y={dogPodiumScale} rotation-y={dogPodiumRotation}>
           <boxGeometry />
           <meshStandardMaterial color={dogPodiumColor} />
-        </mesh>
+        </animated.mesh>
       </group>
       <group position={[6, 0, 0]}>
-        <group
+        <animated.group
           position-y={duckPositionY}
           scale-x={duckScale}
           scale-y={duckScale}
           scale-z={duckScale}>
           <Duck />
-        </group>
-        <mesh scale-y={duckPodiumScale} rotation-y={duckPodiumRotation}>
+        </animated.group>
+        <animated.mesh scale-y={duckPodiumScale} rotation-y={duckPodiumRotation}>
           <boxGeometry />
           <meshStandardMaterial color={duckPodiumColor} />
-        </mesh>
+        </animated.mesh>
       </group>
     </group>
   );

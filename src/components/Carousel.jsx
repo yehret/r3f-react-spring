@@ -13,8 +13,9 @@ import { Witch } from './Haunted/Witch';
 import { FerrisWheel } from './Park/FerrisWheel';
 import { Podium } from './Park/Podium';
 import { ShipLight } from './Park/ShipLight';
+import { Float } from '@react-three/drei';
 
-const STEP_DURATION = 2000;
+const STEP_DURATION = 20000;
 
 export const Carousel = (props) => {
   const { carouselRotation } = useSpring({
@@ -68,12 +69,14 @@ export const Carousel = (props) => {
           <>
             <Podium position={[1, 0, 10]} rotation-y={Math.PI / 2} />
             <FerrisWheel position={[6, 0, 2]} scale={[3, 3, 3]} />
-            <ShipLight
-              position={[5, 0.66, 6]}
-              scale={[0.5, 0.5, 0.5]}
-              rotation-x={-Math.PI / 16}
-              rotation-y={-Math.PI}
-            />
+            <Float speed={4} floatIntensity={0.2}>
+              <ShipLight
+                position={[5, 0.86, 6]}
+                scale={[0.5, 0.5, 0.5]}
+                rotation-x={-Math.PI / 16}
+                rotation-y={-Math.PI}
+              />
+            </Float>
           </>
           {/* FOOD */}
           <>
@@ -86,10 +89,16 @@ export const Carousel = (props) => {
           </>
           {/* HAUNTED */}
           <>
-            <Witch position={[-4, 3, -5]} scale={[1.6, 1.6, 1.6]} rotation-y={Math.PI * 1.25} />
+            <Float speed={4} floatIntensity={0.1}>
+              <Witch position={[-4, 3, -5]} scale={[1.6, 1.6, 1.6]} rotation-y={Math.PI * 1.25} />
+            </Float>
             <BookCase position={[-7, 0, -1.5]} scale={[2, 2, 2]} rotation-y={Math.PI} />
-            <Fence position={[-7.5, 2, -7.5]} scale={[1.6, 1.6, 1.6]} rotation-y={Math.PI / 4} />
-            <Cauldron position={[-2.8, 1, -8]} scale={[1.9, 1.9, 1.9]} />
+            <Float speed={3} floatIntensity={0.005}>
+              <Fence position={[-7.5, 2, -7.5]} scale={[1.6, 1.6, 1.6]} rotation-y={Math.PI / 4} />
+            </Float>
+            <Float speed={-1} floatIntensity={0.01}>
+              <Cauldron position={[-2.8, 1, -8]} scale={[1.9, 1.9, 1.9]} />
+            </Float>
           </>
           {/* BEACH */}
           <>
